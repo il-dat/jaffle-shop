@@ -28,9 +28,9 @@ seeds:
   jaffle_shop:
     +schema: raw
 
-tests:
+data_tests:
   +severity: warn
-  
+
 models:
   jaffle_shop:
     staging:
