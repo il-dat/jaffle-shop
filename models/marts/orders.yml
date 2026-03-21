@@ -6,9 +6,11 @@ models:
         enforced: true
     data_tests:
       - dbt_utils.expression_is_true:
-          expression: "order_items_subtotal = subtotal"
+          arguments:
+            expression: "order_items_subtotal = subtotal"
       - dbt_utils.expression_is_true:
-          expression: "order_total = subtotal + tax_paid"
+          arguments:
+            expression: "order_total = subtotal + tax_paid"
     columns:
       - name: order_id
         description: The unique key of the orders mart.
@@ -23,8 +25,12 @@ models:
         data_type: text
         data_tests:
           - relationships:
-              to: ref('stg_customers')
-              field: customer_id
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+              meta:
+                relationship_type: many-to-one
+                relationship_label: order_to_customer
       - name: location_id
         description: The foreign key relating to the location where the order was placed.
         data_type: text

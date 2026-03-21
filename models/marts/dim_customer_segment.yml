@@ -4,6 +4,8 @@ models:
     config:
       contract:
         enforced: true
+      meta:
+        label: customer_segment
     constraints:
       - type: primary_key
         columns: [customer_id, segment_code]

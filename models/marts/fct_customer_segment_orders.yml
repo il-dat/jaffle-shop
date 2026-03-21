@@ -4,6 +4,8 @@ models:
     config:
       contract:
         enforced: true
+      meta:
+        label: segment_orders
     constraints:
       - type: primary_key
         columns: [order_id]

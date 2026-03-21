@@ -11,6 +11,9 @@ models:
               arguments:
                 to: ref('orders')
                 field: order_id
+              meta:
+                relationship_type: many-to-one
+                relationship_label: order_item_to_order
 
 unit_tests:
   - name: test_supply_costs_sum_correctly
