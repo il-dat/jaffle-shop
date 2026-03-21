@@ -10,6 +10,7 @@ models:
         data_type: text
         constraints:
           - type: primary_key
+            name: pk_locations
         data_tests:
           - not_null
           - unique

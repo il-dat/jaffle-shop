@@ -4,6 +4,9 @@ models:
     config:
       contract:
         enforced: true
+      meta:
+        relationship_labels:
+          fk_order_to_location: order_to_location
     data_tests:
       - dbt_utils.expression_is_true:
           arguments:
@@ -17,6 +20,7 @@ models:
         data_type: text
         constraints:
           - type: primary_key
+            name: pk_orders
         data_tests:
           - not_null
           - unique
@@ -36,6 +40,7 @@ models:
         data_type: text
         constraints:
           - type: foreign_key
+            name: fk_order_to_location
             to: ref('locations')
             to_columns:
               - location_id

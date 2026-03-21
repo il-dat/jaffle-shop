@@ -8,6 +8,7 @@ models:
         label: customer_segment
     constraints:
       - type: primary_key
+        name: pk_dim_customer_segment
         columns: [customer_id, segment_code]
     columns:
       - name: customer_id

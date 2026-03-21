@@ -6,10 +6,14 @@ models:
         enforced: true
       meta:
         label: segment_orders
+        relationship_labels:
+          fk_segment_order_to_customer_segment: segment_order_to_customer_segment
     constraints:
       - type: primary_key
+        name: pk_fct_customer_segment_orders
         columns: [order_id]
       - type: foreign_key
+        name: fk_segment_order_to_customer_segment
         columns: [customer_id, segment_code]
         to: ref('dim_customer_segment')
         to_columns: [customer_id, segment_code]
