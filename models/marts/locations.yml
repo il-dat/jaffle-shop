@@ -1,3 +1,28 @@
+models:
+  - name: locations
+    description: Location overview data mart. One row per location.
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: location_id
+        description: The unique key of the locations mart.
+        data_type: integer
+        constraints:
+          - type: primary_key
+        data_tests:
+          - not_null
+          - unique
+      - name: location_name
+        description: The name of the location.
+        data_type: text
+      - name: tax_rate
+        description: The tax rate for the location.
+        data_type: numeric
+      - name: opened_date
+        description: The date the location opened.
+        data_type: date
+
 semantic_models:
   - name: locations
     description: |

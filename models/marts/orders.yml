@@ -1,6 +1,9 @@
 models:
   - name: orders
     description: Order overview data mart, offering key details for each order inlcluding if it's a customer's first order and a food vs. drink item breakdown. One row per order.
+    config:
+      contract:
+        enforced: true
     data_tests:
       - dbt_utils.expression_is_true:
           expression: "order_items_subtotal = subtotal"
@@ -9,25 +12,72 @@ models:
     columns:
       - name: order_id
         description: The unique key of the orders mart.
+        data_type: integer
+        constraints:
+          - type: primary_key
         data_tests:
           - not_null
           - unique
       - name: customer_id
         description: The foreign key relating to the customer who placed the order.
+        data_type: integer
         data_tests:
           - relationships:
               to: ref('stg_customers')
               field: customer_id
+      - name: location_id
+        description: The foreign key relating to the location where the order was placed.
+        data_type: integer
+        constraints:
+          - type: foreign_key
+            to: ref('locations')
+            to_columns:
+              - location_id
       - name: order_total
         description: The total amount of the order in USD including tax.
+        data_type: numeric
       - name: ordered_at
         description: The timestamp the order was placed at.
+        data_type: date
+      - name: subtotal_cents
+        description: The pre-tax subtotal of the order in cents.
+        data_type: integer
+      - name: tax_paid_cents
+        description: The tax portion of the order in cents.
+        data_type: integer
+      - name: order_total_cents
+        description: The total amount of the order in cents including tax.
+        data_type: integer
+      - name: subtotal
+        description: The pre-tax subtotal of the order in USD.
+        data_type: numeric
+      - name: tax_paid
+        description: The tax portion of the order in USD.
+        data_type: numeric
       - name: order_cost
         description: The sum of supply expenses to fulfill the order.
+        data_type: numeric
+      - name: order_items_subtotal
+        description: The sum of product prices for all items in the order.
+        data_type: numeric
+      - name: count_order_items
+        description: The number of items in the order.
+        data_type: bigint
+      - name: count_food_items
+        description: The number of food items in the order.
+        data_type: bigint
+      - name: count_drink_items
+        description: The number of drink items in the order.
+        data_type: bigint
       - name: is_food_order
         description: A boolean indicating if this order included any food items.
+        data_type: boolean
       - name: is_drink_order
         description: A boolean indicating if this order included any drink items.
+        data_type: boolean
+      - name: customer_order_number
+        description: The sequential order number for this customer (1 = first order).
+        data_type: bigint
 
 unit_tests:
   - name: test_order_items_compute_to_bools_correctly
