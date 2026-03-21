@@ -12,7 +12,7 @@ models:
     columns:
       - name: order_id
         description: The unique key of the orders mart.
-        data_type: integer
+        data_type: text
         constraints:
           - type: primary_key
         data_tests:
@@ -20,14 +20,14 @@ models:
           - unique
       - name: customer_id
         description: The foreign key relating to the customer who placed the order.
-        data_type: integer
+        data_type: text
         data_tests:
           - relationships:
               to: ref('stg_customers')
               field: customer_id
       - name: location_id
         description: The foreign key relating to the location where the order was placed.
-        data_type: integer
+        data_type: text
         constraints:
           - type: foreign_key
             to: ref('locations')
@@ -38,7 +38,7 @@ models:
         data_type: numeric
       - name: ordered_at
         description: The timestamp the order was placed at.
-        data_type: date
+        data_type: timestamp_ntz
       - name: subtotal_cents
         description: The pre-tax subtotal of the order in cents.
         data_type: integer

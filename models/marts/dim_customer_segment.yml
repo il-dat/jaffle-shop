@@ -1,0 +1,23 @@
+models:
+  - name: dim_customer_segment
+    description: Customer dimension with segment classification. One row per customer per segment code (composite grain).
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [customer_id, segment_code]
+    columns:
+      - name: customer_id
+        description: The foreign key to the customer.
+        data_type: text
+        constraints:
+          - type: not_null
+      - name: segment_code
+        description: The customer segment — NEW, REGULAR, or VIP.
+        data_type: varchar
+        constraints:
+          - type: not_null
+      - name: lifetime_order_count
+        description: Total number of orders placed by the customer.
+        data_type: bigint

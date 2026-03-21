@@ -7,7 +7,7 @@ models:
     columns:
       - name: location_id
         description: The unique key of the locations mart.
-        data_type: integer
+        data_type: text
         constraints:
           - type: primary_key
         data_tests:
@@ -18,10 +18,10 @@ models:
         data_type: text
       - name: tax_rate
         description: The tax rate for the location.
-        data_type: numeric
+        data_type: float
       - name: opened_date
         description: The date the location opened.
-        data_type: date
+        data_type: timestamp_ntz
 
 semantic_models:
   - name: locations

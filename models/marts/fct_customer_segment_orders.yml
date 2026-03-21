@@ -1,0 +1,35 @@
+models:
+  - name: fct_customer_segment_orders
+    description: Fact table joining orders to their customer segment at time of order. One row per order.
+    config:
+      contract:
+        enforced: true
+    constraints:
+      - type: primary_key
+        columns: [order_id]
+      - type: foreign_key
+        columns: [customer_id, segment_code]
+        to: ref('dim_customer_segment')
+        to_columns: [customer_id, segment_code]
+    columns:
+      - name: order_id
+        description: The unique key for each order.
+        data_type: text
+        constraints:
+          - type: not_null
+      - name: customer_id
+        description: Part of the composite FK to dim_customer_segment.
+        data_type: text
+        constraints:
+          - type: not_null
+      - name: segment_code
+        description: Part of the composite FK to dim_customer_segment.
+        data_type: varchar
+        constraints:
+          - type: not_null
+      - name: ordered_at
+        description: The date the order was placed.
+        data_type: timestamp_ntz
+      - name: order_total
+        description: The total order amount in USD including tax.
+        data_type: numeric
