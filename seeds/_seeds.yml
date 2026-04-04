@@ -1,0 +1,65 @@
+seeds:
+- name: raw_customers
+  columns:
+  - name: id
+    data_type: text
+  - name: name
+    data_type: text
+- name: raw_items
+  columns:
+  - name: id
+    data_type: text
+  - name: order_id
+    data_type: text
+  - name: sku
+    data_type: text
+- name: raw_orders
+  columns:
+  - name: id
+    data_type: text
+  - name: customer
+    data_type: text
+  - name: ordered_at
+    data_type: timestamp_ntz
+  - name: store_id
+    data_type: text
+  - name: subtotal
+    data_type: number
+  - name: tax_paid
+    data_type: number
+  - name: order_total
+    data_type: number
+- name: raw_products
+  columns:
+  - name: sku
+    data_type: text
+  - name: name
+    data_type: text
+  - name: type
+    data_type: text
+  - name: price
+    data_type: number
+  - name: description
+    data_type: text
+- name: raw_stores
+  columns:
+  - name: id
+    data_type: text
+  - name: name
+    data_type: text
+  - name: opened_at
+    data_type: timestamp_ntz
+  - name: tax_rate
+    data_type: float
+- name: raw_supplies
+  columns:
+  - name: id
+    data_type: text
+  - name: name
+    data_type: text
+  - name: cost
+    data_type: number
+  - name: perishable
+    data_type: boolean
+  - name: sku
+    data_type: text
