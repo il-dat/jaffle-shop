@@ -8,6 +8,7 @@ models:
         label: segment_orders
         relationship_labels:
           fk_segment_order_to_customer_segment: segment_order_to_customer_segment
+          fk_segment_order_to_order: segment_order_to_order
     constraints:
       - type: primary_key
         name: pk_fct_customer_segment_orders
@@ -23,6 +24,11 @@ models:
         data_type: text
         constraints:
           - type: not_null
+          - type: foreign_key
+            name: fk_segment_order_to_order
+            to: ref('orders')
+            to_columns:
+              - order_id
       - name: customer_id
         description: Part of the composite FK to dim_customer_segment.
         data_type: text

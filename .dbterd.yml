@@ -1,0 +1,23 @@
+# dbterd config — honored by the dbterd-vscode extension on every `dbterd: Open ERD`.
+# CLI-compatible: https://github.com/datnguye/dbterd.
+
+# Detect FKs from dbt `foreign_key` model contracts (not `relationships` tests).
+algo: model_contract
+
+# Short node labels (e.g. "orders" instead of "model.jaffle_shop.orders").
+entity-name-format: model
+
+# Modelled tables only.
+resource-type:
+  - model
+
+# Narrow to exactly 4 marts: locations, orders, and every dim_* / fct_*.
+#
+# Note: dbterd's selectors match against the fully-qualified `node_name`
+# (e.g. "model.jaffle_shop.orders"), not the short name. Hence the prefix on
+# every pattern below.
+select:
+  - exact:model.jaffle_shop.locations
+  - exact:model.jaffle_shop.orders
+  - wildcard:model.jaffle_shop.dim_*
+  - wildcard:model.jaffle_shop.fct_*
