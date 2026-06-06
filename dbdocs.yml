@@ -1,0 +1,45 @@
+# dbdocs.yml — site configuration for the Jaffle Shop docs.
+#
+# Every key is optional; delete the file to fall back to defaults. `version` is
+# NOT configured here — it's a `dbdocs deploy --version` argument.
+
+# Site display metadata (injected into the generated single-page site).
+site_name: Jaffle Shop Docs
+site_url: https://il-dat.github.io/jaffle-shop
+site_author: il-dat
+site_description: "**dbt docs** + ERD + column-level lineage for the [Jaffle Shop](https://github.com/dbt-labs/jaffle-shop) project"
+repo_name: il-dat/jaffle-shop
+repo_url: https://github.com/il-dat/jaffle-shop
+project_name: Jaffle Shop
+
+# Where the dbt artifacts (manifest.json / catalog.json) live, and where the
+# generated site is written. Both relative to this directory.
+target_dir: target
+output_dir: target/site
+
+# SQL dialect for column-level lineage. The project runs on Snowflake; omit this
+# line to auto-derive it from the artifact's adapter_type instead.
+dialect: snowflake
+
+# Alias the version switcher treats as the default landing version.
+default_version: latest
+
+# dbterd ERD options — passed straight to DbtErd (use underscore keys). Lives
+# here so the ERD shape is configured in dbdocs.yml, not a separate .dbterd.yml.
+dbterd:
+  # Detect FKs from dbt `foreign_key` model contracts (not `relationships` tests).
+  algo: model_contract
+  # Short node labels (e.g. "orders" instead of "model.jaffle_shop.orders").
+  entity_name_format: table
+  # Modelled tables only.
+  # resource_type:
+  #   - model
+  # Narrow to the marts: locations, orders, and every dim_* / fct_*. Selectors
+  # match the fully-qualified node_name, hence the prefix on each pattern.
+  select:
+    - exact:model.jaffle_shop.locations
+    - exact:model.jaffle_shop.orders
+    - wildcard:model.jaffle_shop.dim_*
+    - wildcard:model.jaffle_shop.fct_*
+
+# show_buy_me_a_coffee: false
