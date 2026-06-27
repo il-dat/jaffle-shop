@@ -44,4 +44,4 @@ models:
         data_type: timestamp_ntz
       - name: order_total
         description: The total order amount in USD including tax.
-        data_type: numeric
+        data_type: numeric(16, 2)

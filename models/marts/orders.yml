@@ -46,7 +46,7 @@ models:
               - location_id
       - name: order_total
         description: The total amount of the order in USD including tax.
-        data_type: numeric
+        data_type: numeric(16, 2)
       - name: ordered_at
         description: The timestamp the order was placed at.
         data_type: timestamp_ntz
@@ -61,16 +61,16 @@ models:
         data_type: integer
       - name: subtotal
         description: The pre-tax subtotal of the order in USD.
-        data_type: numeric
+        data_type: numeric(16, 2)
       - name: tax_paid
         description: The tax portion of the order in USD.
-        data_type: numeric
+        data_type: numeric(16, 2)
       - name: order_cost
         description: The sum of supply expenses to fulfill the order.
-        data_type: numeric
+        data_type: numeric(16, 2)
       - name: order_items_subtotal
         description: The sum of product prices for all items in the order.
-        data_type: numeric
+        data_type: numeric(16, 2)
       - name: count_order_items
         description: The number of items in the order.
         data_type: bigint
