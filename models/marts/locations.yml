@@ -11,6 +11,7 @@ models:
         constraints:
           - type: primary_key
             name: pk_locations
+            warn_unenforced: false
         data_tests:
           - not_null
           - unique

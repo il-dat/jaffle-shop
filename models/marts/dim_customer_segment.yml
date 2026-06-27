@@ -10,6 +10,7 @@ models:
       - type: primary_key
         name: pk_dim_customer_segment
         columns: [customer_id, segment_code]
+        warn_unenforced: false
     columns:
       - name: customer_id
         description: The foreign key to the customer.
